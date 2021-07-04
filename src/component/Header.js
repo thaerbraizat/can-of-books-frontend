@@ -13,15 +13,11 @@ class Header extends React.Component {
         {
               this.props.auth0.isAuthenticated ?
                 <>
-                  
                   <Link to="/">Home</Link>
-                 
                     <Link to="/profile">Profile</Link>
                     <Link to="/LogoutButton">LogOut</Link>
-                  
                 </> :
                   <Link to="/login">Login</Link>
-                
             }
         {/* <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
@@ -31,5 +27,4 @@ class Header extends React.Component {
     );
   }
 }
-
 export default withAuth0(Header);
