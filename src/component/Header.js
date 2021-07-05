@@ -19,6 +19,7 @@ class Header extends React.Component {
                 </> :
                   <Link to="/login">Login</Link>
             }
+           
         {/* <Link to="/">Home</Link>
         <Link to="/profile">Profile</Link>
         <Link to="/Login">Login</Link> */}
