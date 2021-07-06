@@ -25,64 +25,55 @@ class MyFavoriteBooks extends React.Component {
         }).catch(err => { console.log(err); })
       }).catch(err=> console.log(err));
     }
+
+
   }
-//   constructor(){
-//     super();
-//     this.state={
-//       listBooks :[],
-//       email :''
-//     }
-//   }
-// componentDidMount=()=>{
-//   const url='http://localhost:8000/book?email=thaerbraizat13@gmail.com';
-//   axios.get(url).then(response=>{
-//     this.setState({
-//       listBooks : response.data
-//     })
-//     console.log(response.data);
-//   })
-// }
+  constructor(props) {
+    super(props);
+    this.state = {
+      listBooks: [],
+      email: ''
+    }
+  }
 
-// getUserInput=(e)=>{
-//   this.setState({
-//     email:e.target.value
-//   })
+  getUserInput = (e) => {
+    this.setState({
+      email: e.target.value
+    })
+  }
 
-// }
-
-// sendRequest=(e)=>{
-//   e.preventDefault();
-//   const url='http://localhost:8000/book?email=thaerbraizat13@gmail.com';
-//   axios.get(url).then(response=>{
-//     this.setState({
-//       listBooks : response.data
-//     })
-//     console.log(response.data);
-//   })
-// }
+  sendRequest = (e) => {
+    e.preventDefault();
+    const url = 'http://localhost:8000/book?email=nedal.r.alashqar@gmail.com';
+    axios.get(url).then(response => {
+      this.setState({
+        listBooks: response.data
+      })
+      console.log(response.data);
+    })
+  }
 
   render() {
     return (
-      // <ol>
-      // {
-      //   this.state.listBooks.map(book => {
-      //   return <li>{book.name}</li>
-      //   })
-      // }
-      // <ol/>
       <Jumbotron>
-        <h1>My Favorite Books</h1>
-        <p>
-          This is a collection of my favorite books
-        </p>
-        {/* <from>
-          <input type='text' placeholder="email" onChange={(e)=>{this.getUserInput}}/>
-           < button onClick ={(e)=>{this.sendRequest}}>search by email</button>
-          </from> */}
+
+     
+          <h1>My Favorite Books</h1>
+          <p>
+            This is a collection of my favorite books
+          </p>
+          <from>
+            <input type='text' placeholder="search by email ..." onChange={(e) => { this.getUserInput }} />
+            < button onClick={(e) => { this.sendRequest }}>search by email</button>
+          </from>
+          <h2>{this.state.name}</h2>
+
       </Jumbotron>
       
     )
   }
 }
+
+
 
 export default withAuth0(MyFavoriteBooks);
