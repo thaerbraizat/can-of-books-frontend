@@ -26,6 +26,7 @@ class MyFavoriteBooks extends React.Component {
       }).catch(err=> console.log(err));
     }
 
+
   }
   constructor(props) {
     super(props);
@@ -51,9 +52,11 @@ class MyFavoriteBooks extends React.Component {
       console.log(response.data);
     })
   }
+
   render() {
     return (
       <Jumbotron>
+
      
           <h1>My Favorite Books</h1>
           <p>
@@ -64,7 +67,9 @@ class MyFavoriteBooks extends React.Component {
             < button onClick={(e) => { this.sendRequest }}>search by email</button>
           </from>
           <h2>{this.state.name}</h2>
+
       </Jumbotron>
+      
     )
   }
 }
