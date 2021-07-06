@@ -20,13 +20,13 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <IsLoadingAndError>
+          {/* <IsLoadingAndError> */}
             <Header />
             <Switch>
               <Route exact path="/">
-                {/* {
+                {
                   this.props.auth0.isAuthenticated ? <BestBooks /> : <Login />
-                } */}
+                }
 
                 {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               </Route>
@@ -34,9 +34,9 @@ class App extends React.Component {
                 <Login />
               </Route>
               <Route path='/profile'>
-                {/* {
+                {
                   this.props.auth0.isAuthenticated ? <Profile /> : <Login />
-                } */}
+                }
 
               </Route>
               <Route path='/LogoutButton'>
@@ -45,7 +45,7 @@ class App extends React.Component {
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
             </Switch>
             <Footer />
-          </IsLoadingAndError>
+          {/* </IsLoadingAndError> */}
         </Router>
       </>
     );
