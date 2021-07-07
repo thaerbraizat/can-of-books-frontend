@@ -34,6 +34,7 @@ class MyFavoriteBooks extends React.Component {
       listBooks: [],
       email: ''
     }
+
   }
   // componentDidMount = () => {
   //   const url = 'http://localhost:3001/book?email=thaerbraizat13@gmail.com';
@@ -53,17 +54,22 @@ class MyFavoriteBooks extends React.Component {
 
     console.log(this.state.email);
 
+
   }
 
   sendRequest = (e) => {
     e.preventDefault();
+
     const url = `http://localhost:3001/book?email=${this.state.email}`;
+
     axios.get(url).then(response => {
       this.setState({
         listBooks: response.data
       })
-      // console.log(this.state.listBooks)
-      // console.log(response.data.books[0].name);
+
+
+      console.log(response.data);
+
     })
   }
 
@@ -109,11 +115,14 @@ class MyFavoriteBooks extends React.Component {
           })
 
         }
+     
       </Jumbotron>
 
     )
   }
 }
+
+
 
 export default withAuth0(MyFavoriteBooks);
 
