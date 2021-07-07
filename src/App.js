@@ -1,7 +1,7 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import Header from './component/Header';
-import IsLoadingAndError from './component/IsLoadingAndError';
+// import IsLoadingAndError from './component/IsLoadingAndError';
 import Footer from './component/Footer';
 import {
   BrowserRouter as Router,
