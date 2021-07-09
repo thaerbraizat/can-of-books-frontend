@@ -11,7 +11,12 @@ class MyFavoriteBooks extends React.Component {
     super();
     this.state = {
       listBooks: [],
-      email: ''
+      email: '',
+      name: '',
+      description: '',
+      status: '',
+      showUpdate: false,
+      index: 0,
     }
   }
 
@@ -25,7 +30,7 @@ class MyFavoriteBooks extends React.Component {
 
   sendRequest = (e) => {
     e.preventDefault();
-    const url = `http://localhost:3001/book?email=${this.state.email}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/user?email=${this.state.email}`;
     axios.get(url).then(response => {
       this.setState({
         listBooks: response.data
@@ -34,6 +39,62 @@ class MyFavoriteBooks extends React.Component {
     })
   }
 
+  updateName = (e) => this.setState({ name: e.target.value });
+  updateDisc = (e) => this.setState({ description: e.target.value });
+  updateStatus = (e) => this.setState({ status: e.target.value });
+
+  addBook = async (e) => {
+    e.preventDefault();
+    const bodyData = {
+      bookName: this.state.name,
+      bookDescription: this.state.description,
+      bookStatus: this.state.status,
+      email: this.props.auth0.user.email,
+    };
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/book`, bodyData).then((res) => {
+      this.setState({
+        book: res.data.books,
+      });
+    });
+  };
+
+  deleteBook = async (index) => {
+    const query = {
+      email: this.props.auth0.user.email,
+    };
+    await axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/book/${this.state.book[index]._id}`, { params: query })
+      .then((res) => {
+        this.setState({
+          book: res.data.books,
+        });
+      });
+  };
+  bookName;
+
+  showUpdateForm = (idx) => {
+    this.setState({
+      index: idx,
+      showUpdate: !this.state.showUpdate,
+    });
+  };
+
+  update = async (e) => {
+    e.preventDefault();
+    const reqBody = {
+      bookName: this.state.name,
+      bookStatus: this.state.status,
+      bookDescription: this.state.description,
+      email: this.props.auth0.user.email,
+    };
+    console.log(reqBody);
+    await axios.put(`${process.env.REACT_APP_SERVER_URL}/book/${this.state.index}`, reqBody).then((res) => {
+      this.setState({
+        book: res.data.books,
+      });
+    });
+  };
+
   render() {
     return (
       <Jumbotron>
@@ -41,6 +102,39 @@ class MyFavoriteBooks extends React.Component {
         <p>
           This is a collection of my favorite books
         </p>
+        <form onSubmit={(e) => this.addBook(e)}>
+          <label>Name of the Book</label>
+          <input onChange={this.updateName} type="text" />
+
+          <label>Description of the Book</label>
+          <input onChange={this.updateDisc} type="text" />
+
+          <label>Status of the Book</label>
+          <input onChange={this.updateStatus} type="text" />
+
+          <input type="submit" value="Add New Book" />
+        </form>
+
+
+        {this.state.showUpdate && (
+          <form onSubmit={(e) => this.update(e)}>
+          <fieldset>
+            <legend>Update Form</legend>
+
+            <label>Name of the Book</label>
+            <input onChange={(e) => this.updateName(e)} type="text" />
+
+            <label>status</label>
+            <input onChange={(e) => this.updateStatus(e)} type="text" />
+
+            <label>description</label>
+            <input onChange={(e) => this.updateDisc(e)} type="text" />
+
+            <input type="submit" value="Update Book" />
+          </fieldset>
+        </form>
+        )}
+
         <from>
           <input type='text' placeholder="email" onChange={this.getUserInput} />
           < button onClick={(e) => { this.sendRequest(e) }}>search by email</button>
@@ -59,7 +153,7 @@ class MyFavoriteBooks extends React.Component {
               </>
             })
           })
-        }     
+        }
       </Jumbotron>
     )
   }

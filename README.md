@@ -1,7 +1,6 @@
 # Project Name
 
-https://60e1ac470456b55a78cdfd30--laughing-newton-42d5ee.netlify.app/
-
+https://60e888c603eadf5369749bca--wizardly-newton-4f101d.netlify.app/
 **Author**: Nedal & Thaer
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
